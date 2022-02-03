@@ -1,4 +1,4 @@
-package TreeImplementation.BinaryTree.src;
+package FinalExamPreparation;
 
 public class TreeTraversal<E>{
     private static class Node<E> {
@@ -111,6 +111,7 @@ public class TreeTraversal<E>{
     public void printInorder(Node <E> node){
         if (node == null)
             return;
+
         printInorder(node.left);
         System.out.print(node.data + " ");
         printInorder(node.right);
@@ -191,6 +192,30 @@ public class TreeTraversal<E>{
         return count;
     }
 
+    public int countInternalNodes(){
+        return countInternalNodes(root);
+    }
+
+    public int countInternalNodes(Node<E> localRoot){
+        if (localRoot == null)
+            return 0;
+        if (localRoot.left == null && localRoot.right == null)
+            return 0;
+        else
+            return 1 + countInternalNodes(localRoot.left) + countInternalNodes(localRoot.right);
+    }
+
+    public String preOrderToString(){
+        return preOrderToString(root);
+    }
+
+    public String preOrderToString(Node<E> localRoot){
+            if (localRoot == null)
+                return "";
+            else
+                return localRoot.data + " " + preOrderToString(localRoot.left) + preOrderToString(localRoot.right);
+    }
+
     public static void main(String[] args){
         TreeTraversal tree = new TreeTraversal();
 
@@ -210,12 +235,13 @@ public class TreeTraversal<E>{
 
         tree.printInorder();
         System.out.println();
+        System.out.println(tree.preOrderToString());
         //System.out.println(tree.countNodesInRange(tree.root, 10, 20));
         //System.out.println(tree.getParent(36).data);
         //System.out.println(tree.getParent(50).data);
         //System.out.println(tree.isSiblings(36, 50));
 
-        System.out.println(tree.getDepth(46));
+        //System.out.println(tree.countInternalNodes());
         /*System.out.println("count greater than 41 is: " + tree.countGreaterThan(41));
         System.out.print("the numbers which greater than 41: ");
         tree.printGreaterThanInorder(41);
